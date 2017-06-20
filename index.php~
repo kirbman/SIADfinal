@@ -39,5 +39,28 @@
 		}	
 	}
 
+/*
+
+	$sql = "SELECT * FROM posts";	
+		$result = $mysqli->query($sql);
+		if($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()){
+				$postid = htmlspecialchars($row["postid"]);
+				echo"<h3>". htmlentities($row['title'])."</h3>";
+				echo htmlentities($row['content']) . "<br><br>" . "author: " . htmlentities($row['author']) . " // time: " . htmlentities($row['time']) . "<br><br>";
+				$sql = "SELECT * FROM comments WHERE postid = '$postid';";	
+				$comments = $mysqli->query($sql);
+				if($comments->num_rows > 0) {
+					//echo $row['content'] . "<br>" . "Commenter: " . $row['commenter'] . "</a><br><br>";
+					echo"<a	href='comments.php?postid=$postid'>";
+					echo htmlentities($comments->num_rows)."comment(s)</a>";
+				} else {
+					echo"<a	href='commentForm.php?postid=$postid'>";
+					echo "Post your first comment.</a><br><br>";	
+				}
+			}
+		} else {
+			echo "No posts in this blog<br>";	
+		}*/
 ?>
 </html>

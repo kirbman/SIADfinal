@@ -1,0 +1,26 @@
+<html>
+<!-- ADMIN PAGE -->
+<?php require "authentication.php"; ?>
+	<!-- MENU BAR -->
+		<!-- Home Page -->
+		<a href='index.php'>Home</a><br>
+		
+		<!-- Create Blog Posts -->
+		<a href='newpostform.php>New Post
+
+		<!-- Edit Blog Posts -->
+		<a href='edit.php'>Edit Content</a><br>
+		
+		<!-- Add New User -->
+		<a href='addUser.php'>Add New User</a><br>
+
+		<!-- Manage Account -->
+		<a href='changepassform.php'>Change Password</a><br>
+		
+		<!-- Logout -->
+		<a href='logout.php'>Logout</a>
+
+	<!-- BODY -->
+		<!-- Display Posts that can be edited -->
+
+</html>

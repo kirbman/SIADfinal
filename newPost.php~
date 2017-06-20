@@ -1,0 +1,33 @@
+<?php
+	require "authentication.php";
+	$secrettoken = htmlspecialchars($_POST["secrettoken"]);
+	//echo "debug \$secrettoken = $secrettoken <br>\$_SESSION[\"secret\"] = ". $_SESSION["secret"];
+	if(!isset($secrettoken) or ($secrettoken != $_SESSION["secret"])) {
+		echo "CSRF attack detected";
+		die();
+	}
+	function addPost($author, $title, $content) {
+		$author = mysql_real_escape_string($author);
+		$title = mysql_real_escape_string($title);
+		$content = mysql_real_escape_string($content);
+		$time = date("Y-m-d h:i:sa");
+		$sql = "INSERT INTO posts VALUES('$id','$title','$content','$time','$author');";
+		//debug
+		global $mysqli;
+		$result = $mysqli->query($sql);
+		if($result === TRUE){
+			echo "New post added successfully";
+			header("refresh:3; url = index.php");
+		} else {
+			echo "Cannot create post: " . $mysqli->error;
+		}
+	}
+	
+	$author = htmlspecialchars($_SESSION["username"]);
+	$title = htmlspecialchars($_POST["title"]);
+	$content = htmlspecialchars($_POST["content"]);
+	echo "<debugin'> title = $title<br> content = $content<br>author = $author<br>";
+	if(isset($title) and isset($content) and isset($author)) {
+		addPost($author, $title, $content);
+	}
+?>

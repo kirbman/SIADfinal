@@ -1,0 +1,25 @@
+<?php	
+	$mysqli = new mysqli('localhost', 'SIAD_lab7', 'secretpass', 'SIAD_lab7');
+	if($mysqli->connect_error){
+		die('Connection to the database has error: ' . $mysqli->connect_error);
+	}
+	$sql = "SELECT * FROM posts";	
+		$result = $mysqli->query($sql);
+		if($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()){
+				$postid = $row["postid"];
+				echo"<h3>". $row['title']."</h3>";
+				echo $row['content'] . "<br><br>" . "author: " . $row['author'] . " // time: " . $row['time'] . "<br><br><br>";
+				echo"<a	href='comment.php?postid=$postid'>";
+				$sql = "SELECT * FROM comments WHERE postid = '$postid';";	
+				$comments = $mysqli->query($sql);
+				if($comments->num_rows > 0) {
+					echo $comments->num_rows."comments </a>";
+				} else {
+					echo "Post your first comment.</a><br>";	
+				}
+			}
+		} else {
+			echo "No posts in this blog<br>";	
+		}
+?>

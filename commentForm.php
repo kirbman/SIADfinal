@@ -1,0 +1,21 @@
+<html>
+	<h1>Comment</h1>
+
+<?php
+	require "authentication.php";
+	echo "Current time: " . date("Y-m-d h:i:sa");
+	$rand = bin2hex(openssl_random_pseudo_bytes(16));
+	$_SESSION["secret"] = $rand;
+	$postid = $_GET['postid'];
+
+?>
+	<form action="newComment.php" method="POST" class="form addComment">
+		<input type="hidden" name="secrettoken" value="<?php echo $rand; ?>">
+		<input type="hidden" name="postid" value="<?php echo $postid; ?>">
+		<textarea cols="50" rows="4" name="content"></textarea>
+		<!--<p>Comment: <input type="text" name="content"></p>-->
+		<br><button class="button" type="submit">
+			Add New Comment
+		</button>
+	</form>
+</html>
