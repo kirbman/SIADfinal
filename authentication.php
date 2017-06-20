@@ -7,13 +7,16 @@
 	}
 
 	function checkLogin($username, $password) {
-		$sql = "SELECT * FROM users WHERE username = '$username' AND password = password('$password'); ";
 		global $mysqli;
-		$result = $mysqli->query($sql);
-		if($result->num_rows == 1){
+		$stmt = $mysqli->prepare("SELECT username, password FROM users WHERE username=? AND password=password(?)");
+		$stmt->bind_param("ss",$username,$password);
+		$stmt->execute();
+		$stmt->store_result();
+		if($stmt->num_rows == 1 ){
 			return TRUE;
-		}
-		return FALSE;
+		} else {
+			return FALSE;
+		}		
 	}
 
 	//store a login session in $_SESSION["logged"]
